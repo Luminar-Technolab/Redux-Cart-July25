@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function Header() {
   return (
-     <Navbar expand="lg" className="bg-secondary position-fixed w-100">
+     <Navbar expand="lg" className="bg-secondary position-fixed w-100 z-1">
       <Container>
         <Navbar.Brand><Link to={'/'} className='text-decoration-none text-light fw-bold'> <FontAwesomeIcon icon={faTruckFast}/> Daily Cart</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='bg-light'/>
