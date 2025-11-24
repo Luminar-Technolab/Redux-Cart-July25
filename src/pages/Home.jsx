@@ -15,9 +15,24 @@ function Home() {
   const productsPerPage = 8
   const totalPages = Math.ceil(allProducts.length/ productsPerPage)
 
+  const pageItemLastIndex = currentPage * productsPerPage
+  const pageItemStartIndex = pageItemLastIndex - productsPerPage
+  const visibleProductsArray = allProducts?.slice(pageItemStartIndex,pageItemLastIndex)
+
   useEffect(()=>{
     dispatch(getAllProducts())
   },[])
+
+  const navigateNextPage= ()=>{
+    if(currentPage!=totalPages){
+      setCurrentPage(currentPage+1)
+    }
+  }
+  const navigatePreviousPage= ()=>{
+    if(currentPage!=1){
+      setCurrentPage(currentPage-1)
+    }
+  }
 
   return (
     <>
@@ -31,7 +46,7 @@ function Home() {
         {/* dulpcate */}
         {
           allProducts?.length>0?
-            allProducts?.map(product=>(
+            visibleProductsArray?.map(product=>(
               <div key={product?.id} className="col-md-3 mb-2">
                 {/* card - react bootstrap */}
                 <Card >
@@ -48,9 +63,9 @@ function Home() {
         }
 
           <div className="my-3 text-center">
-            <button className="btn"> <FontAwesomeIcon icon={faBackward}/> </button>
+            <button onClick={navigatePreviousPage} className="btn"> <FontAwesomeIcon icon={faBackward}/> </button>
             <span className="fw-bolder"> {currentPage} of {totalPages} </span>
-            <button className="btn"> <FontAwesomeIcon icon={faForward}/> </button>
+            <button onClick={navigateNextPage} className="btn"> <FontAwesomeIcon icon={faForward}/> </button>
           </div>
 
         </div>
